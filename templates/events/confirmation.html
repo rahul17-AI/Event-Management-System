@@ -1,0 +1,29 @@
+<!-- templates/events/confirmation.html -->
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="p-4 bg-light rounded shadow">
+        <h2 class="text-center mb-4">Booking Details</h2>
+
+        <p><strong>Event Name:</strong> {{ details.event_name }}</p>
+        <p><strong>Event Type:</strong> {{ details.event_type }}</p>
+        <p><strong>Event Date:</strong> {{ event_date }}</p>
+        <p><strong>Event Time:</strong> {{ event_time }}</p>
+        <p><strong>Total People:</strong> {{ details.total_people }}</p>
+        <p><strong>Food Type:</strong> {{ details.food_type }}</p>
+        <p><strong>Menu Type:</strong> {{ details.menu_type }}</p>
+        <p><strong>Cake (kg):</strong> {{ details.cake_required }}</p>
+        <p><strong>No. of Suppliers:</strong> {{ details.no_of_suppliers }}</p>
+
+        <hr>
+
+        <form method="post" action="{% url 'calculate_price' %}">
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{ details.id }}">
+            <button type="submit" class="btn btn-primary">Calculate Final Cost</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <!-- Menu Details -->
+        <div class="col-md-6">
+            <div class="bg-light p-4 rounded shadow">
+                <h4>Menu Details</h4>
+                <div class="mb-3">
+                    <label class="form-label">Menu Name</label>
+                    <input type="text" class="form-control" value="MENU-{{ menu_num }}" readonly>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Menu Type</label>
+                    <input type="text" class="form-control" value="{{ menu_type|capfirst }}" readonly>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Current Items (Uncheck to remove)</label>
+                    {% for item in selected_items %}
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" name="final_items" value="{{ item.id }}"
+                            id="item{{ forloop.counter }}" checked>
+                        <label class="form-check-label" for="item{{ forloop.counter }}">
+                            {{ item.item }}
+                        </label>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Replacement Items -->
+        <div class="col-md-6">
+            <div class="bg-light p-4 rounded shadow">
+                <h4>Choose Additional Items</h4>
+                <form method="post">
+                    {% csrf_token %}
+                    {% if extra_items %}
+                    {% for item in extra_items %}
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" name="final_items" value="{{ item.id }}"
+                            id="extra{{ forloop.counter }}">
+                        <label class="form-check-label" for="extra{{ forloop.counter }}">
+                            {{ item.item }}
+                        </label>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <p>No extra items available.</p>
+                    {% endif %}
+
+                    <div class="text-center mt-3">
+                        <button type="submit" class="btn btn-success">Submit</button>
+                        <a href="{% url 'final_details' %}" class="btn btn-primary ms-2">Proceed Without Changes</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

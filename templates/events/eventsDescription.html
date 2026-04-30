@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<div class="container">
+    <div class="jumbotron">
+        <h1>{{ events.name }}</h1>
+        <h6>{{ events.descriptions }}</h6>
+        <p>Basic package: Rs.{{ events.price }} /-</p>
+        <a href="{% url 'enquire' %}" class="btn btn-info">Enquire</a>
+        <a href="{% url 'slotbooking' events.id %}" class="btn btn-success">BookSlot</a>
+
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<br>
+<div class="container">
+    <div class="jumbotron">
+        <h2>Slot Booking for {{ event.name }}</h2>
+        <form method="post" action="">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="event_date" class="form-label">Event Date</label>
+                <input type="date" class="form-control" id="event_date" name="event_date" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="event_time" class="form-label">Event Time</label>
+                <input type="time" class="form-control" id="event_time" name="event_time" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Next</button>
+        </form>
+        <br>
+        <a href="{% url 'indoor_images' event.id %}" class="btn btn-info">Preview Indoor</a>
+        <a href="{% url 'outdoor_images' event.id %}" class="btn btn-info">Preview Outdoor</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<div class="container">
+    <div class="jumbotron">
+        <div class="card card-body">
+            <form action="{% url 'login' %}" method="POST">
+                {% csrf_token %}
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping">Username</span>
+                    <input type="text" class="form-control" placeholder="username" aria-label="username" name="username"
+                        aria-describedby="addon-wrapping">
+                </div>
+                <br>
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping">Password</span>
+                    <input type="password" class="form-control" placeholder="password" aria-label="password"
+                        name="password" aria-describedby="addon-wrapping">
+                </div>
+                <br>
+                <input type="submit" class="btn btn-success" value="login">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

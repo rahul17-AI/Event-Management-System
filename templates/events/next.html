@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="text-center">
+    <h2>Would you like to book catering?</h2>
+    <button class="btn btn-success" onclick="showMenu()">Yes</button>
+    <button class="btn btn-danger" onclick="hideMenu()">No</button>
+</div>
+<br>
+
+<div class="row mt-5 d-none" id="menuWrapper">
+    <div class="col-md-6" id="vegMenuSection">
+        <h4 class="text-center">Veg Menu</h4>
+        {% for item in veg_menu %}
+        <div class="card shadow mb-3 p-3">
+            <h6>₹{{ item.price }}</h6>
+            <h6>(per head)</h6>
+            <br>
+            {{ item.item }}
+            <form action="{% url 'customize' %}" method="get">
+                <input type="hidden" name="menu" value="{{ forloop.counter }}">
+                <input type="hidden" name="type" value="veg">
+                <input type="submit" class="btn btn-primary" value="Customize">
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="col-md-6" id="nonVegMenuSection">
+        <h4 class="text-center">Non-Veg Menu</h4>
+        {% for item in non_veg_menu %}
+        <div class="card shadow mb-3 p-3">
+            <h6>₹{{ item.price }}</h6>
+            <h6>(per head)</h6>
+            <br>
+            {{ item.item }}
+            <form action="{% url 'customize' %}" method="get">
+                <input type="hidden" name="menu" value="{{ forloop.counter }}">
+                <input type="hidden" name="type" value="nonveg">
+                <input type="submit" class="btn btn-primary" value="Customize">
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="text-center">
+    <form action="{% url 'final_details' %}" method="get">
+        <input type="submit" class="btn btn-primary" value="Next">
+    </form>
+</div>
+
+<script>
+    function showMenu() {
+        document.getElementById("menuWrapper").classList.remove("d-none");
+    }
+
+    function hideMenu() {
+        document.getElementById("menuWrapper").classList.add("d-none");
+    }
+</script>
+
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<div class="container">
+    <div class="jumbotron">
+
+        {% if registered %}
+        <div class="card card-body">
+            <h1>Thank you for Registration</h1>
+            <p>Please proceed to <a href="{% url 'login' %}">Login</a></p>
+        </div>
+        {% else %}
+        <h1>Registration Form</h1>
+        <div class="card card-body">
+            <form enctype="multipart/form-data" method="POST">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col">
+                        <p>Username</p>
+                        {{form.username}}
+                    </div>
+                    <div class="col">
+                        <p>Email</p>
+                        {{form.email}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p>Phone</p>
+                        {{form1.phone}}
+                    </div>
+                    <div class="col">
+                        <p>House_no</p>
+                        {{form1.house_no}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p>Street</p>
+                        {{form1.street}}
+                    </div>
+                    <div class="col">
+                        <p>City</p>
+                        {{form1.city}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p>State</p>
+                        {{form1.state}}
+                    </div>
+                    <div class="col">
+                        <p>Zipcode</p>
+                        {{form1.zipcode}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p>Password</p>
+                        {{form.password}}
+                    </div>
+                    <div class="col">
+                        <p>Profile_pic</p>
+                        {{form1.profile_pic}}
+                    </div>
+                </div>
+                <br>
+                {{ form1.captcha }}
+                <br>
+                <input type="submit" value="Register" class="btn btn-success">
+            </form>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

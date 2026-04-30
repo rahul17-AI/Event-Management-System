@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="bg-light p-4 rounded shadow">
+        <h2 class="text-center mb-4">Total Cost Breakdown</h2>
+        <p><strong>Basic Package Price:</strong> ₹{{ basic_package_price }}</p>
+        <p><strong>Per Plate Price:</strong> ₹{{ menu_price }}</p>
+        <p><strong>Total People:</strong> {{ details.total_people }}</p>
+        <p><strong>Total Menu Price:</strong> ₹{{ total_menu_price }}</p>
+        <p><strong>Cake Charges:</strong> ₹{{ cake_price }}</p>
+        <p><strong>Supplier Charges:</strong> ₹{{ supplier_price }}</p>
+        <p><strong>Maintenance Charges:</strong> ₹{{ maintenance_charge }}</p>
+        <p><strong>Cleaning Charges:</strong> ₹{{ cleaning_charge }}</p>
+        <p><strong>GST (6%):</strong> ₹{{ gst }}</p>
+        <hr>
+        <h4 class="text-success">Grand Total: ₹{{ total_cost }}</h4>
+    </div>
+</div>
+<br>
+<div class="text-center">
+    <form action="{% url 'finalize_order' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="detail_id" value="{{ details.id }}">
+        <input type="submit" class="btn btn-primary" value="Confirm">
+    </form>
+</div>
+<br>
+{% endblock %}

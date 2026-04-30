@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background-color: #f4f4f4;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .footer {
+            font-size: 12px;
+            color: #777;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h2>Booking Confirmation</h2>
+        </div>
+        <div class="content">
+            <p>Hi Sir/Madam</p>
+            <p>Your booking confirmation has been successfull by Eventure </p>
+            <ul>
+                <li><strong>Event Name: {{ events.event_name }}</strong></li>
+                <li><strong>Total Cost: {{ events.grand_total }}</strong></li>
+                <li><strong>Event Date: {{ events.event_date }}</strong></li>
+                <li><strong>Event Time: {{ events.event_time }}</strong></li>
+            </ul>
+            <p>Regards,</p>
+            <img src="{% static 'images/booking_confirm.png' %}" alt="Booking Confirmed"
+                style="height:80px; vertical-align:middle;">
+            <p>Eventure</p>
+        </div>
+        <div class="footer">
+            <p>This is an auto generated email, please do not reply to this message</p>
+        </div>
+    </div>
+
+</body>
+
+</html>

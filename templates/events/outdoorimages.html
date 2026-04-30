@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h2>Outdoor Images for {{ event.name }}</h2>
+
+    {% if outdoor_images %}
+    <div class="row">
+        {% for img in outdoor_images %}
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <img src="{{ img.outdoorimg.url }}" class="card-img-top" alt="outdoor image">
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>No outdoor images available for this event.</p>
+    {% endif %}
+</div>
+{% endblock %}

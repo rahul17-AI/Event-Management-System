@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<div class="container">
+    <div class="jumbotron">
+        <h1>“To achieve great things, two things are needed: a plan and not quite enough time.” </h1>
+        <div class="row">
+            {% for i in events %}
+            <div class="col-md-4">
+                <div class="card card-body">
+                    {% if i.image %}
+                    <img src="{{ i.image.url }}" alt="no img">
+                    {% endif %}
+                    <h4><a href="{{i.id}}">{{ i.name }}</a></h4>
+                </div>
+                <br>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

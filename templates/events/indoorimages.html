@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h2>Indoor Images for {{ event.name }}</h2>
+
+    {% if indoor_images %}
+    <div class="row">
+        {% for img in indoor_images %}
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <img src="{{ img.indoorimg.url }}" class="card-img-top" alt="Indoor image">
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>No indoor images available for this event.</p>
+    {% endif %}
+</div>
+{% endblock %}

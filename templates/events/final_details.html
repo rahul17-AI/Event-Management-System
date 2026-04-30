@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="bg-light p-4 rounded shadow">
+        <h2 class="text-center mb-4">Event Catering Details</h2>
+
+        <form method="post" action="{% url 'submit_final_details' %}">
+            {% csrf_token %}
+
+            <div class="row mb-3 align-items-end">
+                <!-- Event Name -->
+                <div class="col-md-6">
+                    <label for="event_name" class="form-label">Event Name</label>
+                    <input type="text" class="form-control" id="event_name" name="event_name" value="{{ event_name }}"
+                        readonly>
+                </div>
+
+                <!-- Event Type -->
+                <div class="col-md-6">
+                    <label for="event_type" class="form-label">Event Type</label>
+                    <select class="form-select" id="event_type" name="event_type" required>
+                        <option value="">Select</option>
+                        <option value="indoor">Indoor</option>
+                        <option value="outdoor">Outdoor</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label for="total_people" class="form-label">Total People</label>
+                    <input type="number" class="form-control" id="total_people" name="total_people" required>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="food_type" class="form-label">Food Type</label>
+                    <select class="form-select" id="food_type" name="food_type" required onchange="updateMenuOptions()">
+                        <option value="">Select</option>
+                        <option value="veg">Veg</option>
+                        <option value="nonveg">Non-Veg</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="menu_type" class="form-label">Menu Type</label>
+                    <select class="form-select" id="menu_type" name="menu_type" required>
+                        <option value="">Select Food Type First</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="no_of_suppliers" class="form-label">Number of Suppliers</label>
+                <input type="number" class="form-control" id="no_of_suppliers" name="no_of_suppliers" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="cake_required" class="form-label">Cake Required (kg)</label>
+                <input type="number" class="form-control" id="cake_required" name="cake_required" min="0" value="0">
+                <small class="text-muted">0 means no cake</small>
+            </div>
+
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" name="welcome_drinks" id="welcome_drinks">
+                <label class="form-check-label" for="welcome_drinks">Welcome Drinks</label>
+            </div>
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" name="welcome_chats" id="welcome_chats">
+                <label class="form-check-label" for="welcome_chats">Welcome Chats</label>
+            </div>
+            <div class="form-check mb-4">
+                <input class="form-check-input" type="checkbox" name="pan" id="pan">
+                <label class="form-check-label" for="pan">Pan</label>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-success">Confirm Booking</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function updateMenuOptions() {
+        const foodType = document.getElementById('food_type').value;
+        const menuType = document.getElementById('menu_type');
+        menuType.innerHTML = ''; // clear previous options
+
+        if (foodType === 'veg') {
+            menuType.innerHTML = `
+                <option value="1">Veg - Menu 1</option>
+                <option value="2">Veg - Menu 2</option>
+                <option value="3">Veg - Menu 3</option>
+            `;
+        } else if (foodType === 'nonveg') {
+            menuType.innerHTML = `
+                <option value="1">Non-Veg - Menu 1</option>
+                <option value="2">Non-Veg - Menu 2</option>
+                <option value="3">Non-Veg - Menu 3</option>
+            `;
+        } else {
+            menuType.innerHTML = `<option value="">Select Food Type First</option>`;
+        }
+    }
+</script>
+
+{% endblock %}
